@@ -11,7 +11,9 @@ WORKDIR /var/www/html
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ=UTC
-ENV SUPERVISOR_PHP_COMMAND="/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan serve --host=0.0.0.0 --port=80"
+ENV SUPERVISOR_PHP_COMMAND="/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan serve --host=0.0.0.0 --port=80 --debug"
+ENV SUPERVISOR_WS_COMMAND="/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan reverb:start --host=0.0.0.0 --port=81 --debug"
+ENV SUPERVISOR_HORIZON_COMMAND="/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan horizon"
 ENV SUPERVISOR_PHP_USER="sail"
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -51,6 +53,11 @@ RUN apt-get update \
     && apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN apt-get update \
+    && apt-get install -y libevent-dev \
+    && pecl install event \
+    && echo "extension=event.so" > /etc/php/8.3/cli/conf.d/999-event.ini
 
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.3
 

@@ -6,7 +6,11 @@ export default {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      listStyleImage: {
+        checkmark: 'url("/img/checkmark.png")',
+      },
+    },
   },
   plugins: [],
 }
