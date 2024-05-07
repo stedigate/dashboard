@@ -66,7 +66,7 @@ return [
         'enabled' => true,
 
         'pages' => [
-            'Dashboard',
+            'Company',
         ],
 
         'widgets' => [

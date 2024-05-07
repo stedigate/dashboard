@@ -9,6 +9,9 @@ DNS.2 = 127.0.0.1
 DNS.3 = ::1
 # List your domain names here
 DNS.4 = stedigate.test
-DNS.7 = www.stedigate.test
-DNS.9 = api.stedigate.test
-DNS.10 = ws.stedigate.test
+DNS.5 = www.stedigate.test
+DNS.6 = api.stedigate.test
+DNS.7 = admin.stedigate.test
+DNS.8 = dashboard.stedigate.test
+DNS.9 = ws.stedigate.test
+DNS.10 = wss.stedigate.test

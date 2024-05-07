@@ -2,7 +2,7 @@
 
 namespace App\Filament\Admin\Resources\TicketCategoryResource\Pages;
 
-use App\Filament\Admin\Resources\TicketCategoryResource;
+use App\Filament\Admin\Resources\HelpdeskCategoryResource;
 use Coderflex\LaravelTicket\Models\Category;
 use Filament\Actions;
 use Filament\Forms\Components\Checkbox;
@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CreateTicketCategory extends CreateRecord
 {
-    protected static string $resource = TicketCategoryResource::class;
+    protected static string $resource = HelpdeskCategoryResource::class;
 
     protected function getCreatedNotification(): ?Notification
     {

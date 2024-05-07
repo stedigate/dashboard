@@ -11,14 +11,21 @@ return new class extends Migration
 {
     public function up()
     {
-        $tableName = config('laravel_ticket.table_names.messages', 'messages');
-
-        Schema::create($tableName['table'], function (Blueprint $table) use ($tableName) {
+        Schema::create('helpdesk_messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId($tableName['columns']['user_foreign_id']);
-            $table->foreignId($tableName['columns']['ticket_foreign_id']);
+            $table->foreignId('user_id');
+            $table->foreignId('company_id');
+            $table->foreignId('helpdesk_tickets_id');
             $table->text('message');
             $table->timestamps();
         });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('helpdesk_messages');
     }
 };

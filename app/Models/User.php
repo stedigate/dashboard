@@ -6,7 +6,6 @@ use App\Models\Enums\UserStatusEnum;
 use App\Models\Queries\UserQueryBuilder;
 use App\Models\Queries\WalletQueryBuilder;
 use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
-use Coderflex\LaravelTicket\Concerns\HasTickets;
 use Database\Factories\UserFactory;
 use Database\Factories\WalletFactory;
 use Filament\Models\Contracts\FilamentUser;
@@ -41,7 +40,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasDefaul
     use SetsProfilePhotoFromUrl;
     use HasRoles;
     use HasPanelShield;
-    use HasTickets;
 
     /**
      * The attributes that are mass assignable.
@@ -124,6 +122,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasDefaul
     public function wallets(): HasMany
     {
         return $this->hasMany(Wallet::class, 'company_id', 'current_company_id');
+    }
+
+    public function tickets(): HasMany
+    {
+        return $this->hasMany(HelpdeskTicket::class, 'company_id', 'current_company_id');
     }
 
     public function canAccessPanel(Panel $panel): bool

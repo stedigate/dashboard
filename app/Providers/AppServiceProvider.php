@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Health\Checks\Checks\BackupsCheck;
@@ -35,6 +36,21 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
             $this->app->register(TelescopeServiceProvider::class);
         }
+        Request::macro('hasValidSignature', function ($absolute = true) {
+            if (config('app.env') === 'local') return true;
+            return URL::hasValidSignature($this, $absolute);
+
+        });
+
+        Request::macro('hasValidRelativeSignature', function () {
+            if (config('app.env') === 'local') return true;
+            return URL::hasValidSignature($this, $absolute = false);
+        });
+
+        Request::macro('hasValidSignatureWhileIgnoring', function ($ignoreQuery = [], $absolute = true) {
+            if (config('app.env') === 'local') return true;
+            return URL::hasValidSignature($this, $absolute, $ignoreQuery);
+        });
     }
 
     /**

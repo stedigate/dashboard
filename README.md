@@ -83,9 +83,33 @@ DNS.2 = 127.0.0.1
 DNS.3 = ::1
 # List your domain names here
 DNS.4 = stedigate.test
-DNS.7 = www.stedigate.test
-DNS.9 = api.stedigate.test
-DNS.10 = ws.stedigate.test
+DNS.5 = www.stedigate.test
+DNS.6 = api.stedigate.test
+DNS.7 = admin.stedigate.test
+DNS.8 = dashboard.stedigate.test
+DNS.9 = ws.stedigate.test
+DNS.10 = wss.stedigate.test
+DNS.11 = waptap.test
+DNS.12 = app.waptap.test
+DNS.13 = web.waptap.test
+DNS.14 = www.waptap.test
+DNS.15 = admin.waptap.test
+DNS.16 = api.waptap.test
+DNS.17 = ws.waptap.test
+DNS.18 = alua.test
+DNS.19 = app.alua.test
+DNS.20 = web.alua.test
+DNS.21 = www.alua.test
+DNS.22 = admin.alua.test
+DNS.23 = api.alua.test
+DNS.24 = ws.alua.test
+DNS.25 = 41u4.test
+DNS.26 = app.41u4.test
+DNS.27 = web.41u4.test
+DNS.28 = www.41u4.test
+DNS.29 = admin.41u4.test
+DNS.30 = api.41u4.test
+DNS.31 = ws.41u4.test
 EOF
 openssl req -new -nodes -newkey rsa:4096 -keyout stedigate.key -out stedigate.csr -subj "/C=US/ST=Washington/L=Seattle/O=Stedigate, Ltd./CN=Stedigate"
 openssl x509 -req -sha512 -days 99999 -extfile v3.ext -CA ca.crt -CAkey ca.key -CAcreateserial -in stedigate.csr -out stedigate.crt

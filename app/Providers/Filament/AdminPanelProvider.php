@@ -34,7 +34,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('admin')
+            ->domain('admin.' . config('app.domain'))
             ->login()
             ->plugins([
                 FilamentShieldPlugin::make(),

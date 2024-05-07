@@ -10,12 +10,17 @@ return new class extends Migration
 {
     public function up()
     {
-        $tableName = config('laravel_ticket.table_names.category_ticket', 'category_ticket');
-
-        Schema::create($tableName['table'], function (Blueprint $table) use ($tableName) {
-            collect($tableName['columns'])->each(function ($column, $key) use ($table) {
-                $table->foreignId($column);
-            });
+        Schema::create('helpdesk_category_ticket', function (Blueprint $table) {
+            $table->foreignId('helpdesk_categories_id');
+            $table->foreignId('helpdesk_tickets_id');
         });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('helpdesk_category_ticket');
     }
 };

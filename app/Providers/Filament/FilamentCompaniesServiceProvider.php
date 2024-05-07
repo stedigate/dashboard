@@ -17,6 +17,7 @@ use App\Actions\FilamentCompanies\UpdateCompanyName;
 use App\Actions\FilamentCompanies\UpdateConnectedAccount;
 use App\Actions\FilamentCompanies\UpdateUserPassword;
 use App\Actions\FilamentCompanies\UpdateUserProfileInformation;
+use App\Filament\Company\Pages\Auth\RequestPasswordReset;
 use App\Models\Company;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -53,12 +54,12 @@ class FilamentCompaniesServiceProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->id('dashboard')
-            ->path('dashboard')
+            ->id('company')
+            ->domain('dashboard.' . config('app.domain'))
             ->default()
             ->login(Login::class)
-            ->passwordReset()
-            ->homeUrl(static fn (): string => Auth::guest() ? '#' : url(Pages\Dashboard::getUrl(panel: 'dashboard', tenant: Auth::user()?->personalCompany())))
+            ->passwordReset(RequestPasswordReset::class)
+            ->homeUrl(static fn (): string => Auth::guest() ? '#' : url(Pages\Dashboard::getUrl(panel: 'company', tenant: Auth::user()?->personalCompany())))
             ->plugins([
                 FilamentApexChartsPlugin::make(),
                 FilamentCompanies::make()
@@ -103,9 +104,9 @@ class FilamentCompaniesServiceProvider extends PanelProvider
             ->tenant(Company::class)
             ->tenantProfile(CompanySettings::class)
             ->tenantRegistration(CreateCompany::class)
-            ->discoverResources(in: app_path('Filament/Dashboard/Resources'), for: 'App\\Filament\\Dashboard\\Resources')
-            ->discoverPages(in: app_path('Filament/Dashboard/Pages'), for: 'App\\Filament\\Dashboard\\Pages')
-            ->discoverWidgets(in: app_path('Filament/Dashboard/Widgets'), for: 'App\\Filament\\Dashboard\\Widgets')
+            ->discoverResources(in: app_path('Filament/Company/Resources'), for: 'App\\Filament\\Company\\Resources')
+            ->discoverPages(in: app_path('Filament/Company/Pages'), for: 'App\\Filament\\Company\\Pages')
+            ->discoverWidgets(in: app_path('Filament/Company/Widgets'), for: 'App\\Filament\\Company\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
@@ -123,13 +124,13 @@ class FilamentCompaniesServiceProvider extends PanelProvider
                     ->label('Company')
                     ->icon('heroicon-o-building-office')
                     ->when(static fn () => Auth::user()?->personalCompany())
-                    ->url(static fn () => url(Pages\Dashboard::getUrl(panel: 'dashboard', tenant: Auth::user()?->personalCompany()))),
+                    ->url(static fn () => url(Pages\Dashboard::getUrl(panel: 'company', tenant: Auth::user()?->personalCompany()))),
             ])
             ->navigationItems([
                 NavigationItem::make('Company Settings')
                     ->label(static fn (): string => __('Company Settings'))
                     ->icon('heroicon-o-cog')
-                    ->url(static fn () => url(CompanySettings::getUrl(panel: 'dashboard', tenant: Auth::user()->personalCompany()))),
+                    ->url(static fn () => url(CompanySettings::getUrl(panel: 'company', tenant: Auth::user()->personalCompany()))),
             ])
             ->middleware([
                 EncryptCookies::class,

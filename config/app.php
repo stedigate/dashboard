@@ -165,4 +165,6 @@ return [
 
     ],
 
+    'domain' => env('APP_DOMAIN', 'stedigate.test'),
+
 ];

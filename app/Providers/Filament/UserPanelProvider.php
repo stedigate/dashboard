@@ -31,6 +31,7 @@ class UserPanelProvider extends PanelProvider
         return $panel
             ->id('user')
             ->path('user')
+            ->domain('dashboard.' . config('app.domain'))
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -46,9 +47,9 @@ class UserPanelProvider extends PanelProvider
                     ->icon('heroicon-o-user-circle')
                     ->url(static fn () => url(Profile::getUrl(panel: 'user', tenant: Auth::user()))),
                 MenuItem::make()
-                    ->label('Dashboard')
+                    ->label('Company')
                     ->icon('heroicon-o-building-office')
-                    ->url(static fn () => url(Pages\Dashboard::getUrl(panel: 'dashboard', tenant: Auth::user()->personalCompany()))),
+                    ->url(static fn () => url(Pages\Dashboard::getUrl(panel: 'company', tenant: Auth::user()->personalCompany()))),
             ])
             ->navigationItems([
                 NavigationItem::make('Personal Access Tokens')
