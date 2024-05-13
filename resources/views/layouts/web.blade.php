@@ -82,16 +82,16 @@
                                 <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
                                 <ul class="text-gray-500 dark:text-gray-400 font-medium">
                                     <li class="mb-4">
-                                        <a href="https://flowbite.com/" class="hover:underline">Documentation</a>
+                                        <a href="{{ url('/doc') }}" class="hover:underline">Documentation</a>
                                     </li>
                                     <li class="mb-4">
-                                        <a href="https://tailwindcss.com/" class="hover:underline">API Reference</a>
+                                        <a href="{{ url('/api-doc') }}" class="hover:underline">API Reference</a>
                                     </li>
                                     <li class="mb-4">
-                                        <a href="https://tailwindcss.com/" class="hover:underline">Status Page</a>
+                                        <a href="{{ url('/up') }}" class="hover:underline">Status Page</a>
                                     </li>
                                     <li class="mb-4">
-                                        <a href="https://tailwindcss.com/" class="hover:underline">Blog</a>
+                                        <a href="{{ url('/blog') }}" class="hover:underline">Blog</a>
                                     </li>
                                     <li>
                                         <a href="https://tailwindcss.com/" class="hover:underline">Invoice Page Demo</a>
